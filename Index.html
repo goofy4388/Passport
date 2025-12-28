@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#0b0f19" />
+  <title>Drink Around the World — Tracker</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <div class="brand">
+        <div class="badge">🍻</div>
+        <div>
+          <h1>Drink Around the World</h1>
+          <p class="sub">Interactive tracker • pace smart • finish all 11</p>
+        </div>
+      </div>
+
+      <div class="topActions">
+        <button id="btnReset" class="btn ghost" type="button" title="Clear everything">Reset</button>
+        <button id="btnPrint" class="btn" type="button" title="Save/Print as PDF">Save as PDF</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="card hero">
+      <div class="heroGrid">
+        <div>
+          <h2>Tonight’s Mission</h2>
+          <p class="muted">
+            Check off each country, add notes, and keep an eye on pace.
+            Your progress saves automatically on your device.
+          </p>
+
+          <div class="miniRow">
+            <div class="pill">
+              <span class="label">Completed</span>
+              <span id="completedCount" class="value">0</span>
+              <span class="label">/ 11</span>
+            </div>
+            <div class="pill">
+              <span class="label">Pace</span>
+              <span id="paceLabel" class="value">—</span>
+            </div>
+          </div>
+
+          <div class="miniRow">
+            <button id="btnStart" class="btn" type="button">Start Timer</button>
+            <button id="btnStop" class="btn ghost" type="button" disabled>Stop</button>
+            <button id="btnHydrate" class="btn ghost" type="button">+ Hydration</button>
+          </div>
+
+          <div class="timerRow">
+            <div class="timerBox">
+              <div class="timerLabel">Elapsed</div>
+              <div id="elapsed" class="timerValue">00:00</div>
+            </div>
+            <div class="timerBox">
+              <div class="timerLabel">Hydration Breaks</div>
+              <div id="hydrations" class="timerValue">0</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="heroRight">
+          <div class="callout">
+            <h3>Quick Rules (Adult Edition)</h3>
+            <ul>
+              <li>1 drink per country (you can always do a “Light Route”).</li>
+              <li>Water every 2–3 countries. Food stop at least twice.</li>
+              <li>Heat + cocktails = surprise knockout.</li>
+            </ul>
+          </div>
+
+          <div class="legal">
+            Fan-made & unofficial. Not affiliated with Disney. 21+ only. Drink responsibly.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="toolbar">
+      <div class="searchWrap">
+        <input id="search" type="search" placeholder="Search countries (ex: Italy, UK)..." />
+      </div>
+      <div class="chips" role="group" aria-label="Filters">
+        <button class="chip active" data-filter="all" type="button">All</button>
+        <button class="chip" data-filter="open" type="button">Not Done</button>
+        <button class="chip" data-filter="done" type="button">Completed</button>
+      </div>
+    </section>
+
+    <section id="list" class="grid" aria-live="polite"></section>
+
+    <section class="card footerCard">
+      <div class="footerGrid">
+        <div>
+          <h3>Shareable “I Finished” Text</h3>
+          <p class="muted">Tap to copy and paste into your group chat or TikTok caption.</p>
+          <button id="btnCopy" class="btn" type="button">Copy completion text</button>
+          <p id="copyStatus" class="muted small" aria-live="polite"></p>
+        </div>
+        <div>
+          <h3>Light / Medium / Heavy</h3>
+          <p class="muted small">Set your route (purely for pacing suggestions).</p>
+          <div class="routeRow" role="group" aria-label="Route selection">
+            <button class="routeBtn" data-route="light" type="button">Light</button>
+            <button class="routeBtn" data-route="medium" type="button">Medium</button>
+            <button class="routeBtn" data-route="heavy" type="button">Heavy</button>
+          </div>
+          <p id="routeHint" class="muted small"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <template id="itemTpl">
+    <article class="card item">
+      <div class="itemTop">
+        <div class="flag" aria-hidden="true"></div>
+        <div class="itemTitle">
+          <h3 class="country"></h3>
+          <p class="hint muted small"></p>
+        </div>
+
+        <label class="check">
+          <input class="done" type="checkbox" />
+          <span>Done</span>
+        </label>
+      </div>
+
+      <div class="itemBody">
+        <div class="row">
+          <label class="field">
+            <span class="label">Drink</span>
+            <input class="drink" type="text" placeholder='e.g., margarita / beer / wine' maxlength="60" />
+          </label>
+
+          <label class="field">
+            <span class="label">Rating</span>
+            <select class="rating">
+              <option value="">—</option>
+              <option value="1">1/5</option>
+              <option value="2">2/5</option>
+              <option value="3">3/5</option>
+              <option value="4">4/5</option>
+              <option value="5">5/5</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field">
+          <span class="label">Notes</span>
+          <textarea class="notes" rows="3" placeholder="Crowd? price? strong pour? food spot?"></textarea>
+        </label>
+
+        <div class="metaRow">
+          <span class="meta muted small">Last updated: <span class="updated">—</span></span>
+          <button class="btn tiny ghost clear" type="button">Clear</button>
+        </div>
+      </div>
+    </article>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
