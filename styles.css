@@ -1,7 +1,7 @@
 :root{
-  --bg:#07122b;
-  --card: rgba(12, 22, 48, .78);
-  --line: rgba(255,255,255,.11);
+  --bg:#08122a;
+  --card: rgba(10, 22, 52, .78);
+  --line: rgba(255,255,255,.12);
   --text:#eef3ff;
   --muted:#a8b7dd;
   --accent:#7dd3fc;
@@ -21,83 +21,62 @@ body{
   background: var(--bg);
   overflow-x:hidden;
 }
+.wrap{max-width:1120px;margin:0 auto;padding:18px}
 
-.wrap{max-width:1100px;margin:0 auto;padding:18px}
-
-/* ---------- Background: “Disney-feel” without trademarked shapes ---------- */
+/* ===== “Disney-feel” magical background (IP-safe) ===== */
 .bg{position:fixed;inset:0;z-index:-2;overflow:hidden}
-
+.bg-gradient{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(900px 520px at 20% 0%, rgba(167,139,250,.20), transparent 55%),
+    radial-gradient(900px 520px at 80% 0%, rgba(125,211,252,.16), transparent 55%),
+    radial-gradient(1200px 800px at 50% 100%, rgba(20,70,120,.25), transparent 60%),
+    linear-gradient(180deg, #08122a, #050a17);
+}
 .bg-stars{
   position:absolute;inset:-20%;
   background-image:
-    radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,.75) 40%, transparent 41%),
-    radial-gradient(1px 1px at 70% 40%, rgba(255,255,255,.70) 40%, transparent 41%),
-    radial-gradient(1px 1px at 40% 80%, rgba(255,255,255,.65) 40%, transparent 41%),
-    radial-gradient(2px 2px at 85% 70%, rgba(255,255,255,.65) 40%, transparent 41%),
-    radial-gradient(1px 1px at 10% 75%, rgba(255,255,255,.55) 40%, transparent 41%),
-    radial-gradient(1px 1px at 55% 20%, rgba(255,255,255,.55) 40%, transparent 41%);
-  opacity:.18;
-  animation: twinkle 6s ease-in-out infinite alternate;
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,.55) 45%, transparent 46%),
+    radial-gradient(1px 1px at 30% 40%, rgba(255,255,255,.45) 45%, transparent 46%),
+    radial-gradient(2px 2px at 65% 25%, rgba(255,255,255,.50) 45%, transparent 46%),
+    radial-gradient(1px 1px at 80% 55%, rgba(255,255,255,.40) 45%, transparent 46%),
+    radial-gradient(2px 2px at 45% 75%, rgba(255,255,255,.45) 45%, transparent 46%),
+    radial-gradient(1px 1px at 20% 85%, rgba(255,255,255,.35) 45%, transparent 46%);
+  opacity:.22;
+  animation: twinkle 5s ease-in-out infinite alternate;
 }
-@keyframes twinkle{from{opacity:.13}to{opacity:.23}}
+@keyframes twinkle{from{opacity:.16}to{opacity:.28}}
 
-.bg-sparkles{
-  position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 15% 25%, rgba(125,211,252,.18), transparent 35%),
-    radial-gradient(circle at 80% 20%, rgba(167,139,250,.18), transparent 38%),
-    radial-gradient(circle at 65% 75%, rgba(125,211,252,.14), transparent 40%),
-    radial-gradient(circle at 25% 80%, rgba(167,139,250,.12), transparent 45%);
-  opacity:.85;
-}
-
-/* Optional background image: assets/bg-sphere.jpg */
-.bg-sphereImg{
+.bg-sphere{
   position:absolute;
-  width:920px;height:920px;
-  left:50%;top:110px;
+  width:880px;height:880px;
+  left:50%;top:130px;
   transform:translateX(-50%);
   border-radius:50%;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(125,211,252,.28), transparent 45%),
-    radial-gradient(circle at 70% 70%, rgba(167,139,250,.22), transparent 55%),
-    url("assets/bg-sphere.jpg");
-  background-size: cover;
-  background-position:center;
   opacity:.18;
+  background:
+    radial-gradient(circle at 35% 30%, rgba(125,211,252,.38), transparent 45%),
+    radial-gradient(circle at 70% 70%, rgba(167,139,250,.28), transparent 55%),
+    repeating-linear-gradient(60deg, rgba(255,255,255,.10) 0 1px, transparent 1px 24px),
+    repeating-linear-gradient(-60deg, rgba(255,255,255,.08) 0 1px, transparent 1px 24px);
   filter: blur(.2px);
 }
-
-/* Built-in “geosphere-ish” pattern (safe abstraction) */
-.bg-geo{
-  position:absolute;
-  width:860px;height:860px;
-  left:50%;top:140px;
-  transform:translateX(-50%);
-  border-radius:50%;
-  opacity:.18;
+.bg-fireworks{
+  position:absolute;inset:0;
   background:
-    radial-gradient(circle at 50% 50%, rgba(255,255,255,.12), transparent 62%),
-    repeating-linear-gradient(60deg, rgba(255,255,255,.09) 0 1px, transparent 1px 22px),
-    repeating-linear-gradient(-60deg, rgba(255,255,255,.07) 0 1px, transparent 1px 22px);
-  mask-image: radial-gradient(circle at 50% 50%, #000 0 68%, transparent 72%);
+    radial-gradient(400px 200px at 20% 22%, rgba(125,211,252,.10), transparent 60%),
+    radial-gradient(420px 220px at 78% 26%, rgba(167,139,250,.09), transparent 60%),
+    radial-gradient(380px 200px at 55% 18%, rgba(255,255,255,.06), transparent 65%);
+  opacity:.6;
+  mix-blend-mode: screen;
+  animation: shimmer 4.5s ease-in-out infinite alternate;
 }
+@keyframes shimmer{from{opacity:.35}to{opacity:.7}}
 
-/* Optional “hidden silhouette” image: assets/bg-hidden.jpg */
-.bg-hiddenImg{
-  position:absolute;
-  right:-160px;bottom:-160px;
-  width:540px;height:540px;
-  background: url("assets/bg-hidden.jpg");
-  background-size: cover;
-  background-position:center;
-  opacity:.10;
-  filter: blur(1px);
-}
-
+/* ===== Header ===== */
 .top{
   position:sticky;top:0;z-index:10;
-  background: rgba(7,18,43,.76);
+  background: rgba(8,18,42,.76);
   backdrop-filter: blur(10px);
   border-bottom:1px solid var(--line);
 }
@@ -107,13 +86,14 @@ body{
   width:44px;height:44px;border-radius:14px;
   display:grid;place-items:center;
   border:1px solid var(--line);
-  background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.16));
+  background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.18));
   box-shadow: var(--shadow);
 }
 h1{margin:0;font-size:18px}
 .sub{margin:2px 0 0;color:var(--muted);font-size:12px}
 .actions{display:flex;gap:10px;flex-wrap:wrap}
 
+/* ===== Buttons ===== */
 .btn{
   border:1px solid var(--line);
   background: linear-gradient(135deg, rgba(125,211,252,.22), rgba(167,139,250,.16));
@@ -139,7 +119,7 @@ h1{margin:0;font-size:18px}
 .hero{padding:16px;margin-top:16px}
 .heroGrid{
   display:grid;
-  grid-template-columns: 1.25fr .75fr;
+  grid-template-columns: 1.2fr .8fr;
   gap:14px;
 }
 @media (max-width:900px){.heroGrid{grid-template-columns:1fr}}
@@ -150,6 +130,7 @@ h3{margin:0 0 6px;font-size:15px}
 .small{font-size:12px}
 .legal{margin-top:10px}
 
+/* ===== Stats ===== */
 .statsRow{
   display:grid;
   grid-template-columns: repeat(3, minmax(0,1fr));
@@ -162,9 +143,10 @@ h3{margin:0 0 6px;font-size:15px}
   border-radius:14px;
   padding:10px 12px;
 }
-.stat .label{font-size:12px;color:var(--muted);font-weight:800}
+.stat .label{font-size:12px;color:var(--muted)}
 .stat .value{font-size:16px;font-weight:950;margin-top:4px}
 
+/* ===== Progress bar ===== */
 .progress{
   width:100%;
   height:12px;
@@ -176,7 +158,7 @@ h3{margin:0 0 6px;font-size:15px}
 .progress .bar{
   height:100%;
   border-radius:999px;
-  background: linear-gradient(90deg, rgba(125,211,252,.9), rgba(167,139,250,.9));
+  background: linear-gradient(90deg, rgba(125,211,252,.85), rgba(167,139,250,.85));
 }
 
 .timerRow{
@@ -193,24 +175,35 @@ h3{margin:0 0 6px;font-size:15px}
 }
 .timerLabel{color:var(--muted);font-weight:800;margin-right:6px}
 
+/* ===== Badge preview ===== */
 .badgePreview{
   border:1px solid var(--line);
   background: rgba(255,255,255,.03);
   border-radius: var(--r);
   padding:14px;
 }
-.badgeImg{
-  width:100%;
-  max-width:340px;
-  display:block;
+.badgeFrame{
+  position:relative;
   margin-top:10px;
   border-radius:14px;
   border:1px solid var(--line);
+  overflow:hidden;
+  background: rgba(0,0,0,.12);
 }
-.badgeImg.broken{display:none}
-.brokenHint{display:none}
-.badgeImg.broken + .brokenHint{display:block}
+.badgeFrame.big{margin:12px 0}
+.badgeImg, .modalBadge{width:100%;display:block}
+.badgeMissing{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  text-align:center;
+  padding:14px;
+  background: rgba(0,0,0,.55);
+  color: var(--text);
+  font-size:13px;
+}
+.badgeMissing code{background: rgba(255,255,255,.12); padding:2px 6px; border-radius:8px}
 
+/* ===== Toolbar ===== */
 .toolbar{
   display:flex;
   align-items:center;
@@ -245,13 +238,14 @@ h3{margin:0 0 6px;font-size:15px}
   border-color: rgba(125,211,252,.35);
 }
 
+/* ===== Grid cards ===== */
 .grid{
   display:grid;
   grid-template-columns: repeat(2, minmax(0,1fr));
   gap:12px;
   padding-bottom:40px;
 }
-@media (max-width:900px){.grid{grid-template-columns:1fr}}
+@media (max-width:820px){.grid{grid-template-columns:1fr}}
 
 .country{padding:14px}
 .countryTop{display:flex;gap:10px;align-items:flex-start;justify-content:space-between}
@@ -264,58 +258,49 @@ h3{margin:0 0 6px;font-size:15px}
   font-size:22px;
 }
 .countryTitle h3{margin:0}
-.where{margin:4px 0 0}
+.tip{margin:4px 0 0}
 
-/* Drink block */
-.drinkCard{
-  display:grid;
-  grid-template-columns: 120px 1fr;
-  gap:12px;
-  margin-top:12px;
-}
-@media (max-width:520px){.drinkCard{grid-template-columns:1fr}}
-
-.drinkThumbWrap{
-  position:relative;
-  border:1px solid var(--line);
-  background: rgba(255,255,255,.03);
-  border-radius:16px;
-  overflow:hidden;
-  min-height:120px;
-}
-.drinkThumb{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:none;
-}
-.drinkThumbWrap.hasImg .drinkThumb{display:block}
-.thumbFallback{
-  position:absolute;inset:0;
-  display:grid;place-items:center;
-  font-size:34px;
-  color: rgba(255,255,255,.55);
-}
-
-.choices{
+/* ===== Drink tiles with images ===== */
+.drinkGrid{
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap:10px;
+  margin-top:12px;
 }
-@media (max-width:520px){.choices{grid-template-columns:1fr}}
-.choiceBtn{
+@media (max-width:480px){.drinkGrid{grid-template-columns:1fr}}
+
+.drinkTile{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  text-align:left;
   border:1px solid var(--line);
   background: rgba(255,255,255,.03);
   color:var(--text);
-  padding:10px 12px;
   border-radius:14px;
+  padding:10px;
   cursor:pointer;
-  text-align:left;
-  font-weight:950;
+  position:relative;
 }
-.choiceBtn:hover{filter:brightness(1.06)}
+.drinkTile:hover{filter:brightness(1.06)}
+.drinkTile.selected{
+  border-color: rgba(125,211,252,.55);
+  box-shadow: 0 12px 30px rgba(0,0,0,.28);
+  background: rgba(125,211,252,.06);
+}
+.drinkImg{
+  width:56px;height:56px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.16);
+  object-fit:cover;
+  flex:0 0 auto;
+}
+.drinkTxt{display:flex;flex-direction:column;gap:4px}
+.drinkName{font-weight:950}
+.drinkWhere{font-size:12px;color:var(--muted);line-height:1.2}
 
-.fields{margin-top:10px}
+.fields{margin-top:12px}
 .field{display:flex;flex-direction:column;gap:6px;margin-bottom:10px}
 .field .label{font-size:12px;color:var(--muted);font-weight:900}
 input, textarea{
@@ -328,20 +313,20 @@ input, textarea{
 }
 textarea{resize:vertical}
 
-.photoRow{display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
-
-.metaRow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
-
+.metaRow{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:8px}
 .country.done{
   border-color: rgba(134,239,172,.35);
-  box-shadow: 0 18px 45px rgba(0,0,0,.35);
+  box-shadow: 0 18px 45px rgba(0,0,0,.34);
 }
-.country.done .flag{background: rgba(134,239,172,.12);border-color: rgba(134,239,172,.35)}
+.country.done .flag{
+  background: rgba(134,239,172,.12);
+  border-color: rgba(134,239,172,.35);
+}
 
-/* Modal */
+/* ===== Modals ===== */
 .modal{
   position:fixed;inset:0;display:none;
-  background: rgba(0,0,0,.55);
+  background: rgba(0,0,0,.58);
   backdrop-filter: blur(6px);
   align-items:center;justify-content:center;
   padding:18px;
@@ -349,8 +334,8 @@ textarea{resize:vertical}
 }
 .modal.show{display:flex}
 .modalCard{
-  max-width:540px;width:100%;
-  background: rgba(12, 22, 48, .94);
+  max-width:560px;width:100%;
+  background: rgba(10, 22, 52, .92);
   border:1px solid var(--line);
   border-radius: var(--r);
   box-shadow: var(--shadow);
@@ -365,17 +350,13 @@ textarea{resize:vertical}
   cursor:pointer;
   font-weight:950;
 }
-.modalBadge{
-  width:100%;
-  border-radius:14px;
-  border:1px solid var(--line);
-  margin:12px 0;
-}
 .modalActions{display:flex;gap:10px;flex-wrap:wrap}
+.howList{margin:10px 0 0; padding-left:18px}
+.howList li{margin:8px 0}
 
 /* Print */
 @media print{
-  .bg, .actions, .toolbar, .timerRow, .choices, .photoRow, .clearBtn, .completeBtn, .modal {display:none !important;}
+  .bg, .actions, .toolbar, .timerRow, .drinkGrid, .clearBtn, .completeBtn, .modal, #btnTestBadge {display:none !important;}
   body{background:#fff;color:#000}
   .card{box-shadow:none;background:#fff;border-color:#ddd}
   :root{--text:#000;--muted:#333}
