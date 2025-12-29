@@ -3,16 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#061124" />
+  <meta name="theme-color" content="#07122b" />
   <title>World Showcase Survivor — Interactive Tracker</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <!-- Background layers (Disney-adjacent vibe, no direct IP) -->
-  <div class="bg">
-    <div class="bg-sphere" aria-hidden="true"></div>
-    <div class="bg-stars" aria-hidden="true"></div>
-    <div class="bg-hidden" aria-hidden="true"></div>
+  <!-- Magical background layers -->
+  <div class="bg" aria-hidden="true">
+    <div class="bg-stars"></div>
+    <div class="bg-sparkles"></div>
+
+    <!-- Optional: put your own image in assets/bg-sphere.jpg -->
+    <div class="bg-sphereImg"></div>
+
+    <!-- Built-in geosphere pattern (no trademarked shapes) -->
+    <div class="bg-geo"></div>
+
+    <!-- Optional: put your own image in assets/bg-hidden.jpg -->
+    <div class="bg-hiddenImg"></div>
   </div>
 
   <header class="top">
@@ -21,7 +29,7 @@
         <div class="brandMark" aria-hidden="true">🍻</div>
         <div>
           <h1>World Showcase Survivor</h1>
-          <p class="sub">11 countries • 1 day • earn the badge</p>
+          <p class="sub">11 countries • 1 day • unlock your badge</p>
         </div>
       </div>
 
@@ -38,8 +46,8 @@
         <div>
           <h2>Your Run</h2>
           <p class="muted">
-            Pick one of the two popular drinks at each country (or type your own), tap <b>Complete</b>, and collect the badge at 11/11.
-            Your progress saves automatically on your phone.
+            Tap a drink suggestion (or type your own), add notes, optionally add a drink photo,
+            then hit <b>Complete</b>. Finish all 11 to unlock the badge.
           </p>
 
           <div class="statsRow">
@@ -57,7 +65,7 @@
             </div>
           </div>
 
-          <div class="progress">
+          <div class="progress" aria-label="progress bar">
             <div class="bar" id="bar" style="width:0%"></div>
           </div>
 
@@ -77,8 +85,11 @@
 
         <div class="badgePreview">
           <h3>Badge Unlock</h3>
-          <p class="muted small">Finish all 11 to unlock your downloadable Survivor badge.</p>
-          <img src="badge.png" alt="World Showcase Survivor badge preview" class="badgeImg" />
+          <p class="muted small">Complete all 11 countries to unlock your Survivor badge.</p>
+          <img src="badge.png" alt="Badge preview" class="badgeImg" onerror="this.classList.add('broken');" />
+          <p class="muted small brokenHint">
+            If the badge image doesn’t show, make sure your file is named <b>badge.png</b> (lowercase) and is in the same folder as index.html.
+          </p>
         </div>
       </div>
     </section>
@@ -97,17 +108,24 @@
 
   <!-- Badge Modal -->
   <div id="modal" class="modal" aria-hidden="true">
-    <div class="modalCard">
+    <div class="modalCard" role="dialog" aria-modal="true" aria-label="Badge unlocked">
       <div class="modalTop">
-        <h2>🎉 You did it!</h2>
+        <h2>🎉 Badge Unlocked!</h2>
         <button id="btnClose" class="iconBtn" type="button" aria-label="Close">✕</button>
       </div>
-      <p class="muted">You completed all 11 countries. Download your badge and post it.</p>
-      <img src="badge.png" alt="Unlocked badge" class="modalBadge" />
+
+      <p class="muted">
+        You completed all 11 countries. Open or download your badge, then post it.
+      </p>
+
+      <img id="modalBadgeImg" src="badge.png" alt="Unlocked badge" class="modalBadge" />
+
       <div class="modalActions">
-        <a id="btnDownload" class="btn" href="badge.png" download="World-Showcase-Survivor-Badge.png">Download Badge</a>
+        <a id="btnOpenBadge" class="btn" href="badge.png" target="_blank" rel="noopener">Open Badge</a>
+        <button id="btnDownloadBadge" class="btn ghost" type="button">Download Badge</button>
         <button id="btnCopy" class="btn ghost" type="button">Copy Share Text</button>
       </div>
+
       <p id="copyStatus" class="small muted"></p>
     </div>
   </div>
@@ -123,21 +141,36 @@
         <button class="completeBtn btn tiny" type="button">Complete</button>
       </div>
 
-      <div class="choices">
-        <button class="choiceBtn" type="button"></button>
-        <button class="choiceBtn" type="button"></button>
-      </div>
+      <div class="drinkCard">
+        <div class="drinkThumbWrap">
+          <img class="drinkThumb" alt="Drink photo" />
+          <div class="thumbFallback">📸</div>
+        </div>
 
-      <div class="fields">
-        <label class="field">
-          <span class="label">Your drink</span>
-          <input class="drink" type="text" maxlength="60" placeholder="Tap a suggestion above or type your own" />
-        </label>
+        <div class="drinkInfo">
+          <div class="choices">
+            <button class="choiceBtn" type="button"></button>
+            <button class="choiceBtn" type="button"></button>
+          </div>
 
-        <label class="field">
-          <span class="label">Notes</span>
-          <textarea class="notes" rows="2" placeholder="Price / strong pour / food stop / vibes"></textarea>
-        </label>
+          <div class="fields">
+            <label class="field">
+              <span class="label">Your drink</span>
+              <input class="drink" type="text" maxlength="60" placeholder="Tap a suggestion above or type your own" />
+            </label>
+
+            <label class="field">
+              <span class="label">Notes</span>
+              <textarea class="notes" rows="2" placeholder="Price / strong pour / food stop / vibes"></textarea>
+            </label>
+          </div>
+
+          <div class="photoRow">
+            <button class="btn tiny ghost uploadBtn" type="button">Add Photo</button>
+            <input class="fileInput" type="file" accept="image/*" hidden />
+            <button class="btn tiny ghost clearPhotoBtn" type="button">Remove Photo</button>
+          </div>
+        </div>
       </div>
 
       <div class="metaRow">
