@@ -161,8 +161,8 @@ function init(){
   // iPhone-friendly badge download
   $btnDownloadBadge.addEventListener("click", async () => {
     try{
-      const resp = await fetch("badge.png", { cache:"no-store" });
-      if(!resp.ok) throw new Error("badge.png not found");
+      const resp = await fetch("world-showcase-survivor-badge.png", { cache:"no-store" });
+      if(!resp.ok) throw new Error("world-showcase-survivor-badge.png not found");
       const blob = await resp.blob();
       const url = URL.createObjectURL(blob);
 
@@ -176,7 +176,7 @@ function init(){
       setTimeout(()=>URL.revokeObjectURL(url), 2500);
     }catch(err){
       // fallback: open in new tab
-      window.open("badge.png", "_blank", "noopener");
+      window.open("world-showcase-survivor-badge.png", "_blank", "noopener");
     }
   });
 
@@ -416,7 +416,7 @@ function maybeUnlockBadge(){
 
 function showModal(){
   // force refresh badge image in case of caching
-  $modalBadgeImg.src = `badge.png?v=${Date.now()}`;
+  $modalBadgeImg.src = `world-showcase-survivor-badge.png?v=${Date.now()}`;
   $modal.classList.add("show");
   $modal.setAttribute("aria-hidden","false");
 }
